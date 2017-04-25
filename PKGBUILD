@@ -28,6 +28,9 @@ pkgver() {
 package() {
   cd $srcdir/$pkgname
 
+  # fthd/isp: Don't return fatal error on missing sensor setfile
+  git cherry-pick 758fe01952bbe2f5ce8b3bf8e7ca0b55723fac8c
+
   for FILE in dkms.conf Makefile *.[ch]; do
     install -Dm 644 "$FILE" "$pkgdir/usr/src/${pkgname/-dkms/}-${pkgver}/$FILE"
   done
